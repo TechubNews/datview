@@ -8,6 +8,7 @@ import { User } from './users/entities/user.entity';
 import { Company } from './database/entities/company.entity';
 import { Asset } from './database/entities/asset.entity';
 import { Holding } from './database/entities/holding.entity';
+import { CompaniesModule } from './companies/companies.module';
 
 @Module({
   imports: [
@@ -31,13 +32,13 @@ import { Holding } from './database/entities/holding.entity';
                 password: configService.get<string>('DATABASE_PASSWORD'),
                 database: configService.get<string>('DATABASE_NAME'),
               }),
-          // 关键改动：告知 TypeORM 所有实体文件的位置
           entities: [User, Company, Asset, Holding],
-          synchronize: true, // 在开发环境中自动同步数据库表结构
+          synchronize: true, 
         };
       },
     }),
     AuthModule,
+    CompaniesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
