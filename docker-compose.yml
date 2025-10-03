@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+  # 后端 API 服务
+  api:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: dat_view_api
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    env_file:
+      - ./backend/.env
+    depends_on:
+      - db
+    environment:
+      # 在 Docker 网络中，主机名就是服务名 'db'
+      DATABASE_HOST: db
+
+  # 前端客户端服务
+  client:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: dat_view_client
+    restart: unless-stopped
+    ports:
+      - "5173:80"
+
+  # PostgreSQL 数据库服务
+  db:
+    image: postgres:15-alpine
+    container_name: dat_view_db
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
+    env_file:
+      - ./backend/.env
+    environment:
+      POSTGRES_USER: ${DATABASE_USER}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+      POSTGRES_DB: ${DATABASE_NAME}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
