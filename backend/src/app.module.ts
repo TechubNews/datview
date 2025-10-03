@@ -9,6 +9,8 @@ import { Company } from './database/entities/company.entity';
 import { Asset } from './database/entities/asset.entity';
 import { Holding } from './database/entities/holding.entity';
 import { CompaniesModule } from './companies/companies.module';
+import { AssetsModule } from './assets/assets.module'; // <-- 新增导入
+import { HoldingsModule } from './holdings/holdings.module'; // <-- 新增导入
 
 @Module({
   imports: [
@@ -39,6 +41,8 @@ import { CompaniesModule } from './companies/companies.module';
     }),
     AuthModule,
     CompaniesModule,
+    AssetsModule, // <-- 新增注册
+    HoldingsModule, // <-- 新增注册
   ],
   controllers: [AppController],
   providers: [AppService],
