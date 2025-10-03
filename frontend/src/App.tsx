@@ -1,4 +1,5 @@
-import { TreasuryDashboard } from './components/TreasuryDashboard';
+// 修复：更新导入路径以匹配文件的实际位置
+import { TreasuryDashboard } from './components/auth/TreasuryDashboard';
 
 function App() {
   return (
@@ -11,3 +12,4 @@ function App() {
 }
 
 export default App;
+

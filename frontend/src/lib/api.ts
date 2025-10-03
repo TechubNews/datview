@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useAuthStore } from '../stores/authStore';
+import { useAuthStore } from '@/stores/authStore';
 
 // 创建一个 axios 实例，配置后端 API 的基础 URL
 const api = axios.create({
@@ -29,6 +29,7 @@ export interface Asset {
   logo_url: string;
 }
 
+// 关键修复：确保 Holding 类型被正确导出
 export interface Holding {
   id: string;
   quantity: number;
@@ -52,8 +53,6 @@ export const getHoldings = async (): Promise<Holding[]> => {
     return response.data;
   } catch (error) {
     console.error('获取持仓数据失败:', error);
-    // 在实际应用中，这里可以进行更复杂的错误处理
-    // 例如，返回一个空数组或抛出一个自定义错误
     return [];
   }
 };
@@ -61,7 +60,6 @@ export const getHoldings = async (): Promise<Holding[]> => {
 
 // --- 认证相关的拦截器 (保持不变) ---
 
-// 请求拦截器：在每个请求中附加 Access Token
 api.interceptors.request.use(
   (config) => {
     const token = useAuthStore.getState().accessToken;
@@ -72,8 +70,6 @@ api.interceptors.request.use(
   },
   (error) => Promise.reject(error),
 );
-
-// (响应拦截器等其他代码保持不变...)
 
 export default api;
 

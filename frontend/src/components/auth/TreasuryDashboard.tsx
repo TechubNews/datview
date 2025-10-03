@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
-import { getHoldings, Holding } from '../lib/api';
-import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
+// 修复：使用路径别名 @/ 修正导入路径
+import { getHoldings, Holding } from '@/lib/api';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import {
   Table,
   TableBody,
@@ -8,9 +9,9 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from './ui/table';
-import { Badge } from './ui/badge';
-import { Skeleton } from './ui/skeleton';
+} from '@/components/ui/table';
+import { Badge } from '@/components/ui/badge';
+import { Skeleton } from '@/components/ui/skeleton';
 import { Bitcoin, DollarSign, Building2, TrendingUp } from 'lucide-react';
 
 // 主仪表盘组件
